@@ -1,0 +1,55 @@
+\def\SetClass{article}
+\documentclass{\SetClass}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\begin{document}
+
+\begin{algorithm}
+    % setcounter用来设置计数器起始位置，会自动加1。
+    % 故该示例从Algorithm 1开始
+    \setcounter{algocf}{0}
+    \SetKwFunction{QuickSort}{QuickSort}
+    \SetKwFunction{Partition}{Partition}
+
+    \caption{QuickSort}\label{algorithm}
+
+    \KwData{$A, low, high$}
+
+    \KwResult{sorted array $A$}
+
+    \tcp*[h]{Array A, Range-left low, Range-right high}
+
+    \uIf{$low < high$}{
+        $p\leftarrow \Partition{A, low, high}$\;
+        $\QuickSort{A, low, p-1}$\;
+        $\QuickSort{A, p+1, high}$\;
+    }
+
+\end{algorithm}
+
+\begin{algorithm}
+    \SetKwFunction{swap}{swap}
+
+    \caption{Partition}\label{algorithm}
+
+    \KwData{$A, low, high$}
+
+    \KwResult{pivot index $j$}
+
+    \tcp*[h]{Array A, Range-left low, Range-right high}
+
+    $pivot\leftarrow A[high]$\;
+    $i\leftarrow low$\;
+
+    \For{$j=low$ to $high-1$}{
+        \uIf{$A[j]<=pivot$}{
+            \swap{$A[i]$, $A[j]$}\;
+            $i\leftarrow i+1$\;
+        }
+    }
+    \swap{$A[i]$, $A[high]$}\;
+
+    \Return{i}\;
+
+\end{algorithm}
+
+\end{document}
